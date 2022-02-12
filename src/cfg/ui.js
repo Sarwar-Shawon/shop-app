@@ -19,7 +19,7 @@ export default {
     text: {
         dark: "#262626",
         light: "#f4f4f4",
-        gray: "rgb(127,127,127)",
+        gray: "#707070",
         primary: "#00FFFF",
     }
 }

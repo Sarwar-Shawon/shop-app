@@ -30,7 +30,30 @@ const Header = (props) => {
                                           return props.navigation.navigate( props.navigateTo || 'Home' )
                                       }}
                     >
-                        <FA5Icon name="arrow-left" size={24} color={ui.color.primary_pest} />
+                        {
+                            props.home ?
+                            <Image
+                                source={require('../../assets/icon/Group.png')}
+                                style={{
+                                    width:  30,
+                                    height: 30,
+                                    marginLeft: 5
+                                }}
+                                resizeMode="contain"
+                            />
+                            :
+                            <Image
+                                source={require('../../assets/icon/Arrow.png')}
+                                style={{
+                                    width:  30,
+                                    height: 30,
+                                    marginLeft: 5
+
+                                }}
+                                resizeMode="contain"
+                            />
+                        }
+
                     </TouchableOpacity>
                 }
 

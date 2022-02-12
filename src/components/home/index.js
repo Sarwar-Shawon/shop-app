@@ -9,7 +9,13 @@ const Stack = createStackNavigator()
 
 function ScreenHome(props) {
     return(
-        <PageWrapper title={"Home"}>
+        <PageWrapper title={"Home"}
+                     showHdr={true}
+                     showBack={true}
+                     home={true}
+                     navigateTo={'Login'}
+                     {...props}
+        >
             <Home {...props}/>
         </PageWrapper>
     )

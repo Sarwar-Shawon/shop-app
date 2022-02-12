@@ -24,8 +24,8 @@ function Authentication(props) {
                 <Image
                     source={require('../../assets/img/authPlaceholder.png')}
                     style={{
-                        width:'100%',
-                        height: 250
+                        width:350,
+                        height: 263
                     }}
                     resizeMode="contain"
                 />
@@ -34,8 +34,8 @@ function Authentication(props) {
                 <BlueButton
                     onPress={()=>props.navigation.navigate('Login')}
                     style={{
-                        height: 40,
-                        width: '60%',
+                        height: 52,
+                        width: 245,
                     }}
                     text='Login With Phone'
                 />

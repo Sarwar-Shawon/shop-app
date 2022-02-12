@@ -16,7 +16,7 @@ import {RdxLogin} from "../../rdx/actions";
 
 function Verification(props) {
     const {params} = props.route
-    const [otp,onOtp] = useState('')
+    const [otp,setOtp] = useState('')
     const dispatch = useDispatch()
     console.log("params",params)
     /**
@@ -41,7 +41,7 @@ function Verification(props) {
                 <CusTextInput
                     val={otp}
                     text={'OTP'}
-                    onChange={(text)=>onOtp(text)}
+                    onChange={(text)=>setOtp(text)}
                     placeholder={'Enter Otp'}
                 />
             </View>
@@ -50,8 +50,8 @@ function Verification(props) {
                 <BlueButton
                     onPress={Login}
                     style={{
-                        height: 40,
-                        width: '80%',
+                        height: 52,
+                        width: 315,
                     }}
                     text='Verify'
                 />

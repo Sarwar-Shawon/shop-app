@@ -17,18 +17,18 @@ import {RdxLogin} from "../../rdx/actions";
 
 function Login(props) {
 
-    const [phone,onPhone] = useState('')
+    const [phone,SetPhone] = useState('')
 
     return(
         <View style={{flex:1}}>
             <View style={{height:60, marginTop: 15, marginLeft: 10}}>
-                <Text style={{fontSize: 18}}>Login</Text>
+                <Text style={{fontSize: 18,color:"#323232"}}>Login</Text>
             </View>
             <View style={{height:80,marginLeft:20, marginRight: 20}}>
                 <CusTextInput
                     text={'Phone'}
                     val={phone}
-                    onChange={(text)=>onPhone(text)}
+                    onChange={(text)=>SetPhone(text)}
                     placeholder={'Phone'}
                 />
             </View>
@@ -39,8 +39,8 @@ function Login(props) {
                         phone: phone
                     })}
                     style={{
-                        height: 40,
-                        width: '80%',
+                        height: 52,
+                        width: 315,
                     }}
                     text='Login With Phone'
 

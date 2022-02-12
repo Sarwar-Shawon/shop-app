@@ -43,9 +43,9 @@ function BlueButton(props) {
 function CusTextInput(props) {
     return (
         <View>
-            <Text style={{fontSize: 12, color: ui.text.gray}}>{props.text}</Text>
+            <Text style={{fontSize: 12, color: "#A6A6A6"}}>{props.text}</Text>
             <TextInput style={{marginTop:8, borderBottomWidth: 0.2 ,borderColor: ui.text.gray , paddingBottom: 10}}
-                       placeholderTextColor={"#ddd"}
+                       placeholderTextColor={"#747474"}
                        autoCorrect={false}
                        placeholder={props.placeholder}
                        value={props.val}
