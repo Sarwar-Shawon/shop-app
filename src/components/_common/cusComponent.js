@@ -56,4 +56,25 @@ function CusTextInput(props) {
         </View>
     )
 }
-export {BlueButton,CusTextInput}
+function Gradient(props) {
+    return (
+        <LinearGradient
+            locations={[0,1]}
+            colors={[props.cl1, props.cl2]}
+            style={{
+                flex: 1,
+                width: 114,
+                height: 65,
+                justifyContent: 'center',
+                alignItems: 'center',
+                borderRadius: 5,
+
+            }}
+            start={{x: 0, y: 1}}
+            end={{x: 1, y: 1}}
+        >
+            <Text style={{color: ui.text.light}}>{props.text}</Text>
+        </LinearGradient>
+    )
+}
+export {BlueButton,CusTextInput,Gradient}

@@ -6,11 +6,12 @@ import {
     View,
     Text,
     TouchableOpacity,
-    FlatList
+    FlatList, StyleSheet
 } from 'react-native'
 import {connect} from 'react-redux'
 import * as actions from '../../rdx/actions'
 import Category from './category'
+import Item from './item'
 function Home(props) {
     console.log("props.__data",props.__data)
     const [featuredList,setFeaturedList] = useState([])
@@ -26,7 +27,7 @@ function Home(props) {
     },[])
     /**
      */
-    const RenderItem = ({item}) =>
+    const RenderCategory = ({item}) =>
     {
         return (
 
@@ -35,17 +36,28 @@ function Home(props) {
             />
         )
     }
+    /**
+     */
+    const RenderItem = ({item}) =>
+    {
+        return (
+
+            <Item item={item}
+                      {...props}
+            />
+        )
+    }
     return(
-        <View style={{flex:1}}>
-            <View style={{height: 100}}>
-                <Text style={{fontSize: 20,color: '#434343', marginLeft: 15}}>
+        <View style={{flex:1, marginTop: 20}}>
+            <View style={{height: 140}}>
+                <Text style={styles.catHeader}>
                     Categories
                 </Text>
                 <FlatList
                     horizontal
                     data={props.__data.categories}
                     keyExtractor={(item) => item.id}
-                    renderItem={RenderItem}
+                    renderItem={RenderCategory}
                     initialNumToRender={5}
                     showsHorizontalScrollIndicator={false}
                     // maxToRenderPerBatch={1}
@@ -53,7 +65,9 @@ function Home(props) {
                 />
             </View>
             <View style={{flex:1}}>
-                <Text style={{color: '#434343'}}>Featured</Text>
+                <Text style={styles.catHeader}>
+                    Featured
+                </Text>
                 <FlatList
                     horizontal
                     data={featuredList}
@@ -61,12 +75,12 @@ function Home(props) {
                     renderItem={RenderItem}
                     initialNumToRender={5}
                     showsHorizontalScrollIndicator={false}
-                    // maxToRenderPerBatch={1}
-                    // extraData={props.__data.categories}
                 />
             </View>
             <View style={{flex:1}}>
-                <Text style={{color: '#434343'}}>Best Sell</Text>
+                <Text style={styles.catHeader}>
+                    Best Sell
+                </Text>
                 <FlatList
                     horizontal
                     data={bestSellList}
@@ -74,15 +88,19 @@ function Home(props) {
                     renderItem={RenderItem}
                     initialNumToRender={5}
                     showsHorizontalScrollIndicator={false}
-                    // maxToRenderPerBatch={1}
-                    // extraData={props.__data.categories}
                 />
             </View>
         </View>
     )
 }
-
-// export default Authentication
+const styles = StyleSheet.create({
+    catHeader: {
+        fontSize: 20,
+        color: '#434343',
+        marginLeft: 15,
+        marginBottom:15
+    }
+});
 /**
  */
 const mapStateToProps = (state) => {

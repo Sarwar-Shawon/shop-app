@@ -4,9 +4,10 @@
 
 import React,{useState,useEffect,useRef} from 'react';
 import {
-    View, Text, FlatList, Image, StyleSheet, TouchableOpacity
+    View, Text, FlatList, Image, StyleSheet, TouchableOpacity,ImageBackground
 } from 'react-native';
 import ui from '../../cfg/ui'
+import {Gradient} from '../_common/cusComponent'
 /**
  */
 function Category(props )
@@ -22,14 +23,17 @@ function Category(props )
     return (
         <View style={styles.container}>
             <View style={[styles.shadow,{margin:5}]}>
-                <Image
+                <ImageBackground
                     source={props.item.img}
                     style={styles.itemPhoto}
                     resizeMode="cover"
-                />
-            </View>
-            <View style={{position:'absolute',height: 19, width: 60,marginTop: 28, marginLeft: 30}}>
-                <Text style={{fontWeight: 'bold', fontSize: 16,color: ui.text.light, textAlign: 'center'}}>{props.item.name}</Text>
+                >
+                    <Gradient
+                        cl1={'rgba('+ props.item.col1.join(',')+')'}
+                        cl2={'rgba('+ props.item.col2.join(',')+')'}
+                        text={props.item.name}
+                    />
+                </ImageBackground>
             </View>
         </View>
     )
@@ -38,13 +42,15 @@ function Category(props )
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        marginLeft:10
+        marginLeft:10,
+
     },
     itemPhoto: {
-        width: 114, //350 // 150 //109
-        height: 65, //263   //180   //115
+        width: 114,
+        height: 65,
+        resizeMode: 'contain',
+        overflow: "hidden",
         borderRadius: 5,
-        resizeMode: 'contain'
     },
     shadow:{
         shadowColor: "#000",
@@ -52,9 +58,10 @@ const styles = StyleSheet.create({
             width: 1,
             height: 2,
         },
-        shadowOpacity: 0.35,
-        shadowRadius: 3.84,
+        shadowOpacity: 0.55,
+        shadowRadius: 3.55,
         elevation: 5,
+
     }
 });
 
