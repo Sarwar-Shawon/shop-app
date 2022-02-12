@@ -56,6 +56,16 @@ const Header = (props) => {
 
                     </TouchableOpacity>
                 }
+                {
+                    props.home &&
+                    <TouchableOpacity style={{position: 'absolute', right: 20}}
+                                      onPress={() => {
+                                          return props.navigation.navigate( 'Checkout' )
+                                      }}
+                    >
+                        <FA5Icon name="cart-arrow-down" size={24} color={ui.text.gray} />
+                    </TouchableOpacity>
+                }
 
                 <View style={{alignItems: 'center', justifyContent: 'center'}}>
                     <Text allowFontScaling={false} style={[styles.title,props.style]}>

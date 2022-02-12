@@ -14,7 +14,7 @@ function ScreenLogin(props) {
         <PageWrapper title={""}
                      showHdr={true}
                      showBack={true}
-                     navigateTo={'Auth'}
+                     navigateTo={'AuthHome'}
                      {...props}
         >
             <Login {...props}/>
@@ -42,14 +42,14 @@ function ScreenAuthorization(props) {
 }
 export default function StackAuth() {
     return(
-        <Stack.Navigator initialRouteName={'Auth'}
+        <Stack.Navigator initialRouteName={'AuthHome'}
                          screenOptions={({route, navigation}) => ({
                              headerShown: false,
                              // gestureEnabled: false,
                              ...TransitionPresets.SlideFromRightIOS,
                          })}
         >
-            <Stack.Screen name={'Auth'} component={ScreenAuthorization}/>
+            <Stack.Screen name={'AuthHome'} component={ScreenAuthorization}/>
             <Stack.Screen name={'Login'} component={ScreenLogin}/>
             <Stack.Screen name={'Verify'} component={ScreenVerification}/>
         </Stack.Navigator>

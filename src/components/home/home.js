@@ -6,6 +6,7 @@ import {
     View,
     Text,
     TouchableOpacity,
+    ScrollView,
     FlatList, StyleSheet
 } from 'react-native'
 import {connect} from 'react-redux'
@@ -13,10 +14,8 @@ import * as actions from '../../rdx/actions'
 import Category from './category'
 import Item from './item'
 function Home(props) {
-    console.log("props.__data",props.__data)
     const [featuredList,setFeaturedList] = useState([])
     const [bestSellList,setBestSellList] = useState([])
-
     /**
      */
     useEffect(()=>{
@@ -48,8 +47,8 @@ function Home(props) {
         )
     }
     return(
-        <View style={{flex:1, marginTop: 20}}>
-            <View style={{height: 140}}>
+        <ScrollView style={{flex:1, marginTop: 20}}>
+            <View style={{flex:1}}>
                 <Text style={styles.catHeader}>
                     Categories
                 </Text>
@@ -90,7 +89,7 @@ function Home(props) {
                     showsHorizontalScrollIndicator={false}
                 />
             </View>
-        </View>
+        </ScrollView>
     )
 }
 const styles = StyleSheet.create({
@@ -98,7 +97,8 @@ const styles = StyleSheet.create({
         fontSize: 20,
         color: '#434343',
         marginLeft: 15,
-        marginBottom:15
+        marginTop:10,
+        marginBottom:10,
     }
 });
 /**

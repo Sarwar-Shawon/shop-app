@@ -6,6 +6,7 @@ import {NavigationContainer} from '@react-navigation/native'
 import {createStackNavigator} from '@react-navigation/stack'
 import StackAuth from '../components/auth'
 import StackHome from '../components/home'
+import StackCheckout from '../components/checkout'
 import connect from 'react-redux/lib/connect/connect';
 import * as actions from '../rdx/actions';
 
@@ -14,12 +15,13 @@ const Stack = createStackNavigator();
  */
 const StackApp = () => {
     return (
-        <Stack.Navigator initialRouteName="Landing"
+        <Stack.Navigator initialRouteName="Auth"
                          screenOptions={({route, navigation}) => ({
                              headerShown: false
                          })}>
             <Stack.Screen name='Auth' component={StackAuth}/>
             <Stack.Screen name='Home' component={StackHome}/>
+            <Stack.Screen name='Checkout' component={StackCheckout}/>
         </Stack.Navigator>
     )
 }

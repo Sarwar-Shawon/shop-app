@@ -4,33 +4,32 @@
 import React from 'react'
 import {createStackNavigator, TransitionPresets} from "@react-navigation/stack";
 import PageWrapper from "../_common/pagewrapper";
-import Home from "./home";
+import Checkout from "./checkout";
 const Stack = createStackNavigator()
 
-function ScreenHome(props) {
+function ScreenCheckout(props) {
     return(
         <PageWrapper title={""}
                      showHdr={true}
                      showBack={true}
-                     home={true}
-                     navigateTo={'Login'}
+                     navigateTo={'Home'}
                      {...props}
         >
-            <Home {...props}/>
+            <Checkout {...props}/>
         </PageWrapper>
     )
 }
 
-export default function StackHome() {
+export default function StackCheckout() {
     return(
-        <Stack.Navigator initialRouteName={'AppHome'}
+        <Stack.Navigator initialRouteName={'AppCheckout'}
                          screenOptions={({route, navigation}) => ({
                              headerShown: false,
                              // gestureEnabled: false,
                              ...TransitionPresets.SlideFromRightIOS,
                          })}
         >
-            <Stack.Screen name={'AppHome'} component={ScreenHome}/>
+            <Stack.Screen name={'AppCheckout'} component={ScreenCheckout}/>
         </Stack.Navigator>
     )
 }
