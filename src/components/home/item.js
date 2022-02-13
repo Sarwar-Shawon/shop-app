@@ -11,7 +11,7 @@ import ui from '../../cfg/ui'
  */
 function Item(props )
 {
-    console.log("props", props)
+    // console.log("props", props)
     /**
      */
     useEffect(()=>{

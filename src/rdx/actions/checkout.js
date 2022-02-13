@@ -80,6 +80,23 @@ export const RdxDeleteCartItem = (p) =>
         }
     }
 }   // RdxDeleteCartItem
+export const RdxConfirmOrder = (p) =>
+{
+    return async (d, gs) =>
+    {
+        try
+        {
+            d(AddToCart({}))
+            d(UpdateSubTotal(0))
+            return {}
+        }
+        catch( err )
+        {
+            console.warn( 'actions/checkout: RdxConfirmOrder: err: ', err )
+            return Promise.reject( err )
+        }
+    }
+}   // RdxConfirmOrder
 
 const CalculateTotal = (cart_obj) =>{
 

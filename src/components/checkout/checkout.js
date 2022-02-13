@@ -15,6 +15,7 @@ import ui from '../../cfg/ui'
 import {BlueButton} from "../_common/cusComponent";
 import FA5Icon from "react-native-vector-icons/FontAwesome5";
 import MCIcon from "react-native-vector-icons/MaterialCommunityIcons";
+import {ShowAlert} from "../_common/ShowAlert";
 
 function Checkout(props) {
 
@@ -99,10 +100,16 @@ function Checkout(props) {
     }
     /**
      */
-    const ConfirmOrder = () =>{
+    const ConfirmOrder = async () =>{
 
         try {
-
+            ShowAlert({
+                title: 'Success', msg: `Your Order has submitted successfully.`,
+                OnOK:() => {
+                    props.RdxConfirmOrder()
+                    return props.navigation.navigate( 'Home' )
+                }
+            })
         }catch(err){
             return {err}
         }
@@ -154,7 +161,7 @@ function Checkout(props) {
                         <Text style={{color: "#919191", fontSize: 14}}>Discount</Text>
                     </View>
                     <View>
-                        <Text style={{color: "#434343", fontSize: 14}}>${parseFloat(props.__checkout.discount).toFixed(2)}</Text>
+                        <Text style={{color: "#434343", fontSize: 14}}>${!Object.keys(props.__checkout.cart).length? 0 : parseFloat(props.__checkout.discount).toFixed(2)}</Text>
                     </View>
                 </View>
                 <View style={styles.sumHeader}>
@@ -162,7 +169,7 @@ function Checkout(props) {
                         <Text style={{color: "#919191", fontSize: 14}}>Shipping</Text>
                     </View>
                     <View>
-                        <Text style={{color: "#434343", fontSize: 14}}>${parseFloat(props.__checkout.shipping).toFixed(2)}</Text>
+                        <Text style={{color: "#434343", fontSize: 14}}>${parseFloat(!Object.keys(props.__checkout.cart).length? 0 :props.__checkout.shipping).toFixed(2)}</Text>
                     </View>
                 </View>
                 <View style={{borderWidth:0.5,  borderColor: "#979797", margin: 20}}></View>
@@ -171,13 +178,20 @@ function Checkout(props) {
                         <Text style={{color: "#585B5E", fontSize: 14}}>Total</Text>
                     </View>
                     <View>
-                        <Text style={{color: "#434343", fontSize: 14}}>${parseFloat(props.__checkout.subtotal + props.__checkout.shipping - props.__checkout.discount ).toFixed(2)}</Text>
+                        <Text style={{color: "#434343", fontSize: 14}}>${parseFloat(!Object.keys(props.__checkout.cart).length? 0 :(props.__checkout.subtotal + props.__checkout.shipping - props.__checkout.discount) ).toFixed(2)}</Text>
                     </View>
                 </View>
                 <Counter />
                 <View style={{margin:20,justifyContent:'center', alignItems: 'center'}}>
                     <BlueButton
-                        onPress={()=>{}}
+                        onPress={()=>{
+
+                            Object.keys(props.__checkout.cart).length ?
+                            ConfirmOrder().catch() :
+                                ShowAlert({
+                                    title: 'Error', msg: 'Please select an item.'
+                                })
+                        }}
                         style={{
                             height: 52,
                             width: 315,
