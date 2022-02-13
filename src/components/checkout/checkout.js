@@ -177,7 +177,7 @@ function Checkout(props) {
                 <View style={{
                     marginLeft:20,
                     marginRight: 20,
-                    marginTop: 10
+                    marginTop: 10,
                 }}>
                     <Text style={{color: "#434343", fontSize: 16}}>{props.__checkout.address}</Text>
                 </View>

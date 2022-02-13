@@ -13,6 +13,7 @@ import * as actions from '../../rdx/actions'
 import ui from '../../cfg/ui'
 import {BlueButton,CusTextInput} from "../_common/cusComponent";
 import {RdxLogin} from "../../rdx/actions";
+import {ShowAlert} from "../_common/ShowAlert";
 
 function Verification(props) {
     const {params} = props.route
@@ -26,6 +27,13 @@ function Verification(props) {
             const resp = await dispatch(RdxLogin({username: params.phone, otp:otp}))
             if(resp)
                 return props.navigation.navigate('Home')
+            else
+            {
+                ShowAlert({
+                    title: 'Error', msg: `Information you've given is incorrect.`,
+                    OnOK:() => {}
+                })
+            }
         }catch(err){
             return {err}
         }

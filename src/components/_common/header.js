@@ -25,7 +25,7 @@ const Header = (props) => {
                 {
                     props.showBack &&
                     <TouchableOpacity style={{position: 'absolute', left: 10}}
-                                      onPress={() => {
+                                      onPress={props.home ? ()=> {} : () => {
                                           props.navigation.goBack(null)
                                           return props.navigation.navigate( props.navigateTo || 'Home' )
                                       }}
