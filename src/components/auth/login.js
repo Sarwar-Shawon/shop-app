@@ -21,7 +21,7 @@ function Login(props) {
 
     return(
         <View style={{flex:1}}>
-            <View style={{height:60, marginTop: 15, marginLeft: 10}}>
+            <View style={{height:60, marginTop: 15, marginLeft: 15}}>
                 <Text style={{fontSize: 18,color:"#323232"}}>Login</Text>
             </View>
             <View style={{height:80,marginLeft:20, marginRight: 20}}>

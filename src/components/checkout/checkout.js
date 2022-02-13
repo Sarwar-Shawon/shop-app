@@ -52,7 +52,7 @@ function Checkout(props) {
     const RenderItem = ({item}) =>
     {
         const _item = props.__checkout.cart[item]
-        console.log("item", _item)
+        // console.log("item", _item)
 
         return (
             <View style={[styles.cartItem,styles.shadow,{backgroundColor: '#fff',marginBottom: 8}]}>
@@ -64,8 +64,8 @@ function Checkout(props) {
                     <Image
                         source={_item.img}
                         style={{
-                            width:109,
-                            height: 115
+                            width:119,
+                            height: 125
                         }}
                         resizeMode="cover"
                     />
@@ -73,10 +73,10 @@ function Checkout(props) {
                 <View style={{
                     flex:1
                 }}>
-                    <View style={{margin: 15}}>
-                        <Text style={{padding:2, color: ui.text.dark}}>{_item.name}</Text>
-                        <Text style={{padding:2, color: ui.text.gray}}>{_item.brand? _item.brand: ''}</Text>
-                        <Text style={{padding:2, color: ui.text.dark,marginBottom: 8}}>${_item.price}</Text>
+                    <View style={{marginLeft: 20}}>
+                        <Text style={{padding:2, color: ui.text.dark,marginBottom: 1}}>{_item.name}</Text>
+                        <Text style={{padding:2, color: ui.text.gray,marginBottom: 1}}>{_item.brand? _item.brand: 'Bata'}</Text>
+                        <Text style={{padding:2, color: '#374ABE',marginBottom: 13,fontSize:15}}>${parseFloat(_item.price).toFixed(2)}</Text>
 
                         <View style={{
                             flexDirection: 'row',
@@ -114,7 +114,6 @@ function Checkout(props) {
                         </View>
                     </View>
                 </View>
-
                 <TouchableOpacity style={{position:'absolute', alignItems: 'center',right:20,top:10}}
                                   onPress={() => {
                                       props.RdxDeleteCartItem(_item)
@@ -122,7 +121,6 @@ function Checkout(props) {
                 >
                     <MCIcon name="close" size={24} color={ui.text.gray} />
                 </TouchableOpacity>
-
             </View>
         )
     }
@@ -148,7 +146,7 @@ function Checkout(props) {
      */
     return(
         <View style={{flex:1}}>
-            <View style={{height: 50, flexDirection: 'row', justifyContent:'space-between',alignItems:'center'}}>
+            <View style={{height: 40, flexDirection: 'row', justifyContent:'space-between',alignItems:'center'}}>
                 <View style={{flex:1}}>
                     <Text style={styles.chkHeader}>
                         Checkout
@@ -172,7 +170,7 @@ function Checkout(props) {
                 />
             </View>
 
-            <View style={{flex:1}}>
+            <View style={{flex: 1}}>
 
                 <View style={{
                     marginLeft:20,
@@ -182,7 +180,7 @@ function Checkout(props) {
                     <Text style={{color: "#434343", fontSize: 16}}>{props.__checkout.address}</Text>
                 </View>
 
-                <View style={{borderWidth:0.5,  borderColor: "#979797", margin: 20}}></View>
+                <View style={{borderWidth:0.5,  borderColor: "#979797", margin: 10,marginLeft:20,marginRight:20}}></View>
 
                 <View style={styles.sumHeader}>
                     <View>
@@ -208,7 +206,7 @@ function Checkout(props) {
                         <Text style={{color: "#434343", fontSize: 14}}>${parseFloat(!Object.keys(props.__checkout.cart).length? 0 :props.__checkout.shipping).toFixed(2)}</Text>
                     </View>
                 </View>
-                <View style={{borderWidth:0.5,  borderColor: "#979797", margin: 20}}></View>
+                <View style={{borderWidth:0.5,  borderColor: "#979797", margin: 10,marginLeft:20,marginRight:20}}></View>
                 <View style={styles.sumHeader}>
                     <View>
                         <Text style={{color: "#585B5E", fontSize: 14}}>Total</Text>
@@ -217,7 +215,6 @@ function Checkout(props) {
                         <Text style={{color: "#434343", fontSize: 14}}>${parseFloat(!Object.keys(props.__checkout.cart).length? 0 :(props.__checkout.subtotal + props.__checkout.shipping - props.__checkout.discount) ).toFixed(2)}</Text>
                     </View>
                 </View>
-
                 <View style={{margin:20,justifyContent:'center', alignItems: 'center'}}>
                     <BlueButton
                         onPress={()=>{
@@ -236,6 +233,7 @@ function Checkout(props) {
                     />
                 </View>
             </View>
+
         </View>
     )
 }

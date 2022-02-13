@@ -10,7 +10,7 @@ import {
     Image,
     ActivityIndicator,
     StatusBar, SafeAreaView,
-    StyleSheet,
+    StyleSheet, Platform
 
 } from 'react-native'
 import ui from '../../cfg/ui'
@@ -76,7 +76,7 @@ const Header = (props) => {
                         position:'absolute',
                         margin: 2,
                         right: 5,
-                        top: -20,
+                        top: Platform.OS === 'android' ? -8 : -20,
                         height: 25,
                         width: 25,
                         borderRadius: 20,
