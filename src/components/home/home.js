@@ -29,7 +29,6 @@ function Home(props) {
     const RenderCategory = ({item}) =>
     {
         return (
-
             <Category item={item}
                       {...props}
             />
@@ -40,7 +39,6 @@ function Home(props) {
     const RenderItem = ({item}) =>
     {
         return (
-
             <Item item={item}
                       {...props}
             />

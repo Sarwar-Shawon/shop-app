@@ -6,7 +6,7 @@ import {persistReducer} from 'redux-persist'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import Auth from './Auth'
 import Data from './Data'
-import Checkout from './Data'
+import Checkout from './Checkout'
 /**
  */
 const rdx_reduers = combineReducers( {

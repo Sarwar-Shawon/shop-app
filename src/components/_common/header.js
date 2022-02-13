@@ -66,6 +66,29 @@ const Header = (props) => {
                         <FA5Icon name="cart-arrow-down" size={24} color={ui.text.gray} />
                     </TouchableOpacity>
                 }
+                {
+                    props.home && Object.keys( props.__checkout.cart).length ?
+                    <TouchableOpacity
+                        onPress={() => {
+                            return props.navigation.navigate( 'Checkout' )
+                        }}
+                        style={{
+                        position:'absolute',
+                        margin: 2,
+                        right: 5,
+                        top: -20,
+                        height: 25,
+                        width: 25,
+                        borderRadius: 20,
+                        backgroundColor: "#6666CC",
+                        justifyContent: 'center',
+                        alignItems: 'center'
+                    }}>
+                        <Text style={{color: '#fdf3ff', fontSize: 10, fontWeight: 'bold'}}>{Object.keys( props.__checkout.cart).length}</Text>
+                    </TouchableOpacity>
+                    :
+                        null
+                }
 
                 <View style={{alignItems: 'center', justifyContent: 'center'}}>
                     <Text allowFontScaling={false} style={[styles.title,props.style]}>

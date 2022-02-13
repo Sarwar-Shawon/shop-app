@@ -1,13 +1,13 @@
 /**
  *  @copyright Sarwar Hoshen
  */
-import React, {useEffect, useState} from 'react'
+import React, {useEffect, useState,useRef} from 'react'
 import {
     View,
     Text,
     TouchableOpacity,
     ScrollView,
-    FlatList, StyleSheet, Image
+    FlatList, StyleSheet, Image, Animated
 } from 'react-native'
 import {connect} from 'react-redux'
 import * as actions from '../../rdx/actions'
@@ -17,7 +17,98 @@ import FA5Icon from "react-native-vector-icons/FontAwesome5";
 import MCIcon from "react-native-vector-icons/MaterialCommunityIcons";
 
 function Checkout(props) {
-    const [featuredList,setFeaturedList] = useState([])
+
+    /**
+     */
+    const RenderItem = ({item}) =>
+    {
+        const _item = props.__checkout.cart[item]
+        console.log("item", _item)
+
+        return (
+            <View style={[styles.cartItem,styles.shadow,{backgroundColor: '#fff',marginBottom: 8}]}>
+
+                <View style={{
+                    width:109,
+                    height: 115
+                }}>
+                    <Image
+                        source={_item.img}
+                        style={{
+                            width:109,
+                            height: 115
+                        }}
+                        resizeMode="cover"
+                    />
+                </View>
+                <View style={{
+                    flex:1
+                }}>
+                    <View style={{margin: 15}}>
+                        <Text style={{padding:2, color: ui.text.dark}}>{_item.name}</Text>
+                        <Text style={{padding:2, color: ui.text.gray}}>{_item.brand? _item.brand: ''}</Text>
+                        <Text style={{padding:2, color: ui.text.dark,marginBottom: 8}}>${_item.price}</Text>
+
+                        <View style={{
+                            flexDirection: 'row',
+                            backgroundColor: '#F6F6F6',
+                            width: 120,
+                            height: 40,
+                            alignItems: 'center',
+                            padding: 5,
+
+                        }}
+                        >
+                            <TouchableOpacity style={{flex:1, alignItems: 'center',}}
+                                              onPress={() => {
+                                                  props.RdxUpdateCart(_item, 'minus')
+                                              }}
+                            >
+                                {/*<FA5Icon name="minus" size={24} color={ui.text.dark} />*/}
+                                <Text style={{fontSize: 20, fontWeight: 'bold'}}>-</Text>
+                            </TouchableOpacity>
+
+                            <View style={{flex:1,alignItems: 'center',}}>
+                                <Text style={{fontSize:16, color: ui.text.dark}}>{_item.quantity}</Text>
+                            </View>
+
+                            <TouchableOpacity style={{flex:1,alignItems: 'center',}}
+                                              onPress={() => {
+                                                  props.RdxUpdateCart(_item, 'plus')
+                                              }}
+                            >
+                                {/*<FA5Icon name="plus" size={24} color={ui.text.dark} />*/}
+                                <Text style={{fontSize: 20, fontWeight: 'bold'}}>+</Text>
+
+                            </TouchableOpacity>
+
+                        </View>
+                    </View>
+                </View>
+
+                <TouchableOpacity style={{position:'absolute', alignItems: 'center',right:20,top:10}}
+                                  onPress={() => {
+                                      props.RdxDeleteCartItem(_item)
+                                  }}
+                >
+                    <MCIcon name="close" size={24} color={ui.text.gray} />
+                </TouchableOpacity>
+
+            </View>
+        )
+    }
+    /**
+     */
+    const ConfirmOrder = () =>{
+
+        try {
+
+        }catch(err){
+            return {err}
+        }
+    }
+    /**
+     */
     return(
         <View style={{flex:1}}>
             <View style={{height: 50}}>
@@ -25,74 +116,37 @@ function Checkout(props) {
                     Checkout
                 </Text>
             </View>
-            <ScrollView style={{flex:2,margin:20}}>
-                <View style={[styles.cartItem,styles.shadow,{backgroundColor: '#fff'}]}>
 
-                    <View style={{
-                        width:109,
-                        height: 115
-                    }}>
-                        <Image
-                            source={require('../../assets/img/authPlaceholder.png')}
-                            style={{
-                                width:109,
-                                height: 115
-                            }}
-                            resizeMode="cover"
-                        />
-                    </View>
-                    <View style={{
-                        flex:1
-                    }}>
-                        <View style={{margin: 15}}>
-                            <Text style={{padding:2, color: ui.text.dark}}>Woman t-shirt</Text>
-                            <Text style={{padding:2, color: ui.text.gray}}>Lotto</Text>
-                            <Text style={{padding:2, color: ui.text.dark}}>$13</Text>
+            <View style={{flex:1,margin:20}}>
+                <FlatList
+                    data={Object.keys(props.__checkout.cart)}
+                    keyExtractor={(item) => props.__checkout.cart[item].id}
+                    renderItem={RenderItem}
+                    initialNumToRender={5}
+                    showsVerticalScrollIndicator={false}
+                    // maxToRenderPerBatch={1}
+                    // extraData={props.__data.categories}
+                />
+            </View>
 
-                            <View style={{
-                                flexDirection: 'row',
-                                backgroundColor: '#F6F6F6',
-                                width: 120,
-                                height: 40,
-                                alignItems: 'center',
-                                padding: 5,
-                            }}
-                            >
-                                <TouchableOpacity style={{flex:1, alignItems: 'center',}}
-                                                  onPress={() => {}}
-                                >
-                                    <FA5Icon name="minus" size={24} color={ui.text.dark} />
-                                </TouchableOpacity>
-
-                                <View style={{flex:1,alignItems: 'center',}}>
-                                    <Text style={{fontSize:16, color: ui.text.dark}}>2</Text>
-                                </View>
-
-                                <TouchableOpacity style={{flex:1,alignItems: 'center',}}
-                                                  onPress={() => {}}
-                                >
-                                    <FA5Icon name="plus" size={24} color={ui.text.dark} />
-                                </TouchableOpacity>
-
-                            </View>
-                        </View>
-                    </View>
-
-                    <TouchableOpacity style={{position:'absolute', alignItems: 'center',right:20,top:10}}
-                                      onPress={() => {}}
-                    >
-                        <MCIcon name="close" size={24} color={ui.text.gray} />
-                    </TouchableOpacity>
-
-                </View>
-            </ScrollView>
             <View style={{flex:1}}>
+
+                <View style={{
+                    marginLeft:20,
+                    marginRight: 20,
+                    marginTop: 10
+                }}>
+                    <Text style={{color: "#434343", fontSize: 16}}>{props.__checkout.address}</Text>
+                </View>
+
+                <View style={{borderWidth:0.5,  borderColor: "#979797", margin: 20}}></View>
+
                 <View style={styles.sumHeader}>
                     <View>
                         <Text style={{color: "#919191", fontSize: 14}}>Subtotal</Text>
                     </View>
                     <View>
-                        <Text style={{color: "#434343", fontSize: 14}}>$160</Text>
+                        <Text style={{color: "#434343", fontSize: 14}}>${parseFloat(props.__checkout.subtotal).toFixed(2)}</Text>
                     </View>
                 </View>
                 <View style={styles.sumHeader}>
@@ -100,7 +154,7 @@ function Checkout(props) {
                         <Text style={{color: "#919191", fontSize: 14}}>Discount</Text>
                     </View>
                     <View>
-                        <Text style={{color: "#434343", fontSize: 14}}>$160</Text>
+                        <Text style={{color: "#434343", fontSize: 14}}>${parseFloat(props.__checkout.discount).toFixed(2)}</Text>
                     </View>
                 </View>
                 <View style={styles.sumHeader}>
@@ -108,7 +162,7 @@ function Checkout(props) {
                         <Text style={{color: "#919191", fontSize: 14}}>Shipping</Text>
                     </View>
                     <View>
-                        <Text style={{color: "#434343", fontSize: 14}}>$160</Text>
+                        <Text style={{color: "#434343", fontSize: 14}}>${parseFloat(props.__checkout.shipping).toFixed(2)}</Text>
                     </View>
                 </View>
                 <View style={{borderWidth:0.5,  borderColor: "#979797", margin: 20}}></View>
@@ -117,9 +171,10 @@ function Checkout(props) {
                         <Text style={{color: "#585B5E", fontSize: 14}}>Total</Text>
                     </View>
                     <View>
-                        <Text style={{color: "#434343", fontSize: 14}}>$160</Text>
+                        <Text style={{color: "#434343", fontSize: 14}}>${parseFloat(props.__checkout.subtotal + props.__checkout.shipping - props.__checkout.discount ).toFixed(2)}</Text>
                     </View>
                 </View>
+                <Counter />
                 <View style={{margin:20,justifyContent:'center', alignItems: 'center'}}>
                     <BlueButton
                         onPress={()=>{}}
@@ -133,6 +188,56 @@ function Checkout(props) {
             </View>
         </View>
     )
+}
+
+function Counter(props) {
+
+    const CounterView = ({scale = 1})=>(
+        <Animated.View
+            style={{
+                width: 50,
+                height: 50,
+                transform:[
+                    {scale}
+                ],
+                justifyContent:'center',
+                alignItems: 'center'
+            }}
+        >
+            <Text>
+                27
+            </Text>
+        </Animated.View>
+    )
+
+    const usePulse = (startDelay = 500) => {
+
+        const scale = useRef(new Animated.Value(1)).current;
+
+        const pulse = () => {
+            Animated.sequence([
+                Animated.timing(scale, { toValue: 1.2 ,useNativeDriver: true}),
+                Animated.timing(scale, { toValue: 0.8 ,useNativeDriver: true}),
+
+            ],).start(() => pulse());
+        };
+
+        useEffect(() => {
+            const timeout = setTimeout(() => pulse(), startDelay);
+            return () => clearTimeout(timeout);
+        }, []);
+
+        return scale;
+    };
+
+    const scale = usePulse();
+    return (
+        <View
+            style={{ flex: 1, alignItems: 'center', justifyContent: 'space-around' }}
+        >
+            <CounterView scale={scale} />
+        </View>
+    );
 }
 const styles = StyleSheet.create({
     chkHeader: {
@@ -151,6 +256,7 @@ const styles = StyleSheet.create({
     },
     cartItem:{
         flex:1,
+        height: 140,
         flexDirection: 'row',
         // width: 327,
         // height:133,

@@ -11,6 +11,7 @@ import ui from '../../cfg/ui'
  */
 function Item(props )
 {
+    console.log("props", props)
     /**
      */
     useEffect(()=>{
@@ -19,7 +20,11 @@ function Item(props )
     /**
      */
     return (
-        <View style={styles.container}>
+        <TouchableOpacity style={styles.container}
+                          onPress={()=>{
+                              props.RdxAddToCart(props.item)
+                          }}
+        >
             <View style={[{margin:5}]}>
                 <Image
                     source={props.item.img}
@@ -33,7 +38,13 @@ function Item(props )
             <View>
                 <Text style={styles.itemText}>{props.item.name}</Text>
             </View>
-        </View>
+            {
+                props.__checkout.cart[props.item.id] ?
+                    <View style={[styles.cnt]}>
+                        <Text style={{color: '#fdf3ff'}}>{props.__checkout.cart[props.item.id].quantity}</Text>
+                    </View> : null
+            }
+        </TouchableOpacity>
     )
 }   // Item
 
@@ -53,7 +64,19 @@ const styles = StyleSheet.create({
         color: ui.text.dark,
         textAlign: 'left',
         marginLeft: 5,
-        padding: 2,
+        padding: 2
+    },
+    cnt:{
+        position:'absolute',
+        margin: 2,
+        right: 10,
+        top: 8,
+        height: 30,
+        width: 30,
+        borderRadius: 20,
+        backgroundColor: "#6666CC",
+        justifyContent: 'center',
+        alignItems: 'center'
     }
 });
 
