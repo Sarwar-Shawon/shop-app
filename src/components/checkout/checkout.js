@@ -19,6 +19,34 @@ import {ShowAlert} from "../_common/ShowAlert";
 
 function Checkout(props) {
 
+    const timeInterval = useRef();
+    const [count, setCount] = useState(20)
+    /**
+     */
+    useEffect(() => {
+
+        timeInterval.current = setInterval(() => {
+            setCount(oldCount=> oldCount ? oldCount-1 : 0)
+        }, 1000);
+
+        return () =>{
+            clearInterval(timeInterval.current)
+        }
+
+    }, []);
+    /**
+     */
+    useEffect(() => {
+
+        if(count === 0)
+        {
+            clearInterval(timeInterval.current)
+            return props.navigation.navigate( 'Home' )
+        }
+
+    }, [count]);
+
+
     /**
      */
     const RenderItem = ({item}) =>
@@ -103,6 +131,8 @@ function Checkout(props) {
     const ConfirmOrder = async () =>{
 
         try {
+            clearInterval(timeInterval.current)
+
             ShowAlert({
                 title: 'Success', msg: `Your Order has submitted successfully.`,
                 OnOK:() => {
@@ -118,10 +148,16 @@ function Checkout(props) {
      */
     return(
         <View style={{flex:1}}>
-            <View style={{height: 50}}>
-                <Text style={styles.chkHeader}>
-                    Checkout
-                </Text>
+            <View style={{height: 50, flexDirection: 'row', justifyContent:'space-between',alignItems:'center'}}>
+                <View style={{flex:1}}>
+                    <Text style={styles.chkHeader}>
+                        Checkout
+                    </Text>
+                </View>
+                <View style={{flex:2,flexDirection: 'row', justifyContent: 'center', alignItems:'center'}}>
+                    <Text style={styles.timeSec}>Time Left To Submit:</Text>
+                    <Counter count={count}/>
+                </View>
             </View>
 
             <View style={{flex:1,margin:20}}>
@@ -181,7 +217,7 @@ function Checkout(props) {
                         <Text style={{color: "#434343", fontSize: 14}}>${parseFloat(!Object.keys(props.__checkout.cart).length? 0 :(props.__checkout.subtotal + props.__checkout.shipping - props.__checkout.discount) ).toFixed(2)}</Text>
                     </View>
                 </View>
-                <Counter />
+
                 <View style={{margin:20,justifyContent:'center', alignItems: 'center'}}>
                     <BlueButton
                         onPress={()=>{
@@ -207,44 +243,52 @@ function Checkout(props) {
 function Counter(props) {
 
     const CounterView = ({scale = 1})=>(
-        <Animated.View
-            style={{
-                width: 50,
-                height: 50,
-                transform:[
-                    {scale}
-                ],
-                justifyContent:'center',
-                alignItems: 'center'
-            }}
-        >
-            <Text>
-                27
-            </Text>
-        </Animated.View>
+
+        <View style={{
+            width: 40,
+            height: 40,
+            justifyContent:'center',
+            alignItems: 'center',
+            backgroundColor: props.count <= 5 ? '#99000a' : '#659DF6',
+            borderRadius: 20
+        }}>
+            <Animated.View
+                style={{
+
+                    transform:[
+                        {scale}
+                    ]
+                }}
+            >
+                <Text style={{fontWeight: 'bold', fontSize: 20 , color: '#fff' }}>
+                    {props.count}
+                </Text>
+            </Animated.View>
+        </View>
+
     )
 
-    const usePulse = (startDelay = 500) => {
+    const calScale = (startDelay = 500) => {
 
         const scale = useRef(new Animated.Value(1)).current;
 
-        const pulse = () => {
+        const animate = () => {
             Animated.sequence([
                 Animated.timing(scale, { toValue: 1.2 ,useNativeDriver: true}),
                 Animated.timing(scale, { toValue: 0.8 ,useNativeDriver: true}),
 
-            ],).start(() => pulse());
+            ],).start(() => animate());
         };
 
         useEffect(() => {
-            const timeout = setTimeout(() => pulse(), startDelay);
+            const timeout = setTimeout(() => animate(), startDelay);
             return () => clearTimeout(timeout);
         }, []);
 
         return scale;
     };
 
-    const scale = usePulse();
+    const scale = calScale(props.count <= 5 ? 500 : 1000 );
     return (
         <View
             style={{ flex: 1, alignItems: 'center', justifyContent: 'space-around' }}
@@ -258,6 +302,12 @@ const styles = StyleSheet.create({
         fontSize: 20,
         color: '#434343',
         marginLeft: 16,
+        marginBottom:10,
+        marginTop: 5
+    },
+    timeSec: {
+        fontSize: 20,
+        color: '#434343',
         marginBottom:10,
         marginTop: 5
     },
