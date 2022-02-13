@@ -2,6 +2,10 @@
 
 A mobile application built using React Native.
 
+## Authentication
+
+For Authentication please use phone: 01797569055 and otp: 1234
+
 ## Installation
 
 In the root directory
