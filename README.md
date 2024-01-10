@@ -33,11 +33,11 @@ To download the APK, click [here](https://drive.google.com/file/d/1ngeF_4MKjOBSP
 
 
 # App Screenshot
-![Simulator Screen Shot - iPhone 13 - 2022-02-13 at 20 46 40](https://user-images.githubusercontent.com/16131704/153758790-cbf87741-cb6d-4eeb-a3f7-c6e98814a62d.png)
-![Simulator Screen Shot - iPhone 13 - 2022-02-13 at 20 46 48](https://user-images.githubusercontent.com/16131704/153758785-3b6152fd-f3f8-4c37-8fbd-e491a3d954ad.png)
-![Simulator Screen Shot - iPhone 13 - 2022-02-13 at 20 46 54](https://user-images.githubusercontent.com/16131704/153758774-9ed0caf9-d9bd-4f63-955b-7d5a6035f9e9.png)
-![Simulator Screen Shot - iPhone 13 - 2022-02-13 at 20 47 18](https://user-images.githubusercontent.com/16131704/153758738-8934649a-3de7-4c13-842e-5caa28b2c263.png)
-![Simulator Screen Shot - iPhone 13 - 2022-02-13 at 20 47 05](https://user-images.githubusercontent.com/16131704/153758657-9b8870f5-c5a5-43a8-bb46-28646090cc80.png)
+<img src="https://user-images.githubusercontent.com/16131704/153758790-cbf87741-cb6d-4eeb-a3f7-c6e98814a62d.png" height=800/>
+<img src="https://user-images.githubusercontent.com/16131704/153758785-3b6152fd-f3f8-4c37-8fbd-e491a3d954ad.png" height=800/>
+<img src="https://user-images.githubusercontent.com/16131704/153758774-9ed0caf9-d9bd-4f63-955b-7d5a6035f9e9.png" height=800/>
+<img src="https://user-images.githubusercontent.com/16131704/153758738-8934649a-3de7-4c13-842e-5caa28b2c263.png" height=800/>
+<img src="https://user-images.githubusercontent.com/16131704/153758657-9b8870f5-c5a5-43a8-bb46-28646090cc80.png" height=800/>
 
 
 
